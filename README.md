@@ -38,3 +38,11 @@ The proposed implementation being worked separates V1 into technology stack feat
 - XDV schemas
 - did-xdv
 - Verifiable credentials
+
+## Must haves
+
+
+1. Allow RSA or EC doc signing, either basic or qualified signing.
+2. Must store in decentralized content networks and sign transaction with an  EC  keypair.
+3. Must use encryption or ZK signatures to protect privacy data.
+4. 
