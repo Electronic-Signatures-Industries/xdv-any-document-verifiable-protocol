@@ -7,42 +7,108 @@ XDV Protocol -  Technology Whitepaper
 XDV in is current form has a wallet module in Javascript, a VueJS web application and Java Signer. It has a way to store documents
 using an append-log protocol on top of Swarm V1.
 
-## V2 - An extensible protocol 
+## V2 - Smart Contracts and did
 
-The proposed implementation being worked separates V1 into technology stack features:
+### Content storage
 
-- Dart Wallet
-- Flutter UI
-- Microservices in Go and Node 15
-- Solidity Smart Contracts
+Must be dual or pluggable, uses both IPFS and Swarm Bee. Protocol for storing objects contains  :
 
-### Cryptography
+- An XDV index.json - JSON Schema
+- An updated DID
+- An updated DDoc
 
-- ECDSA, EDDSA, RSA (Legacy)
-- SafetyNet, WebAuthn
-- BLS, TSS
+#### XDV JSON Schema
 
+```js
+{
+epoch: 0,
+timestamp: 18521596,
+did: 'did.json',
+ddoc: 'refs.json',
+sig: '...',
+hash:'....'
+}
+```
 
-### Blockchain
-
-- HDWallet
-- A new DNS/IPNS/ENS attestation for proof of identity
-
-### Storage
-
-- IPFS
-- IPLD
-
-### DID
-
-- XDV schemas
-- did-xdv
-- Verifiable credentials
-
-## Must haves
+**epoch**: current  epoch from smart contract
+**timestamp**: current time from smart contract
+**did**: current did
+**ddoc**: current did doc
 
 
-1. Allow RSA or EC doc signing, either basic or qualified signing.
-2. Must store in decentralized content networks and sign transaction with an  EC  keypair.
-3. Must use encryption or ZK signatures to protect privacy data.
-4. 
+
+#### XDV DID Doc JSON Schema
+
+```js
+{
+documentTransactions: [{
+ref: 'cid',
+hash,
+sig,
+algorithm,
+length,
+contentType,
+scopes,
+sigSpec,
+created,
+lastModified,
+isAnon,
+isMultisig,
+signedWithDID,
+}]
+}
+```
+Each document transaction has:
+
+**ref**: cid
+**hash**: document hash
+**sig**: document signature
+**algorithm**: algorithm used
+**length**: length in bytes
+**contentType**: content type
+**scopes**: roles / acls
+**sigSpec**
+**isAnon**: contains anon creds sig
+**isMultisig**: has been signed with multisig
+**signedWithDID**: did reference
+**lastModified**
+**created**
+
+
+Folder structure
+
+- index.json
+- did.json
+- doc.json
+- index.html
+
+#### XDV Index Presentation
+
+index.html contains a single page application which renders a XDV document sig package 
+
+#### DID
+
+XDV DID module uses a RSA sig generated from ACME Let's Encrypt API creating a PKCS#12 with Chain of Trust with a KYC on top to validate Proof of Residency. This allows XDV PKCS Signature Application client to work both with Smart Cards and Portable PKCS signatures in the form of .p12 files. An existing testnet API can be accessed in https://app.xdv.digital/p12
+
+Additional DID signatures in Ed25519 and ECDSA / secp256k1 are also attached
+
+### Smart Contracts
+
+XDV uses a light version of MDV contracts for workflows
+
+### ExternalAdapterRegistry
+
+### RoutingRegistry
+
+### ABIWorkflows
+
+### SmartRouter
+
+
+An **adapter** is a job to be executed, once a **event lifecycle pipeline like ABIWorkflow** steps thru each state, with the next step being **a registered route**
+
+Create Job
+    |
+Execute **adapter**  -- **event lifecycle** [before - mount - after - next] -- **route**
+
+## Copyright  Nov  2020 // Rogelio Morrell IFESA
