@@ -21,12 +21,12 @@ Must be dual or pluggable, uses both IPFS and Swarm Bee. Protocol for storing ob
 
 ```js
 {
-epoch: 0,
-timestamp: 18521596,
-did: 'did.json',
-ddoc: 'refs.json',
-sig: '...',
-hash:'....'
+    epoch: 0,
+    timestamp: 18521596,
+    did: 'did.json',
+    ddoc: 'refs.json',
+    sig: '...',
+    hash:'....'
 }
 ```
 
@@ -41,20 +41,20 @@ hash:'....'
 
 ```js
 {
-documentTransactions: [{
-ref: 'cid',
-hash,
-sig,
-algorithm,
-length,
-contentType,
-scopes,
-sigSpec,
-created,
-lastModified,
-isAnon,
-isMultisig,
-signedWithDID,
+    documentTransactions: [{
+    ref: 'cid',
+    hash,
+    sig,
+    algorithm,
+    length,
+    contentType,
+    scopes,
+    sigSpec,
+    created,
+    lastModified,
+    isAnon,
+    isMultisig,
+    signedWithDID,
 }]
 }
 ```
