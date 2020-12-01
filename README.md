@@ -40,20 +40,22 @@ Must be dual or pluggable, uses both IPFS and Swarm Bee. Protocol for storing ob
 #### XDV DID Doc JSON Schema
 
 ```js
+{
     documentTransactions: {
-    ref: 'cid',
-    hash,
-    sig,
-    algorithm,
-    length,
-    contentType,
-    scopes,
-    sigSpec,
-    created,
-    lastModified,
-    isAnon,
-    isMultisig,
-    signedWithDID
+        ref: 'cid',
+        hash,
+        sig,
+        algorithm,
+        length,
+        contentType,
+        scopes,
+        sigSpec,
+        created,
+        lastModified,
+        isAnon,
+        isMultisig,
+        signedWithDID,
+    }
 }
 ```
 Each document transaction has:
