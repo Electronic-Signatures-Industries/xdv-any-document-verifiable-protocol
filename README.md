@@ -41,7 +41,7 @@ Must be dual or pluggable, uses both IPFS and Swarm Bee. Protocol for storing ob
 
 ```js
 {
-    documentTransactions: [{
+    documentTransactions: {
     ref: 'cid',
     hash,
     sig,
@@ -55,7 +55,7 @@ Must be dual or pluggable, uses both IPFS and Swarm Bee. Protocol for storing ob
     isAnon,
     isMultisig,
     signedWithDID,
-}]
+}
 }
 ```
 Each document transaction has:
