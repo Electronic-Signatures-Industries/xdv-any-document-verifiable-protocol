@@ -96,18 +96,6 @@ Additional DID signatures in Ed25519 and ECDSA / secp256k1 are also attached
 
 XDV uses a light version of MDV contracts for workflows
 
-mapActions tx
-mapGetters queries
-
-DR, PACIENTE, FARMACIA
-
-0, EMITE RECETA -> PACIENTE RECIBE
-1, PACIENTE ADQUIERE USANDO RECETA -> FARMACIA VERIFIES CREDENTIALS
-FORK
-1, 2, Y) FARMACIA VENDE MEDICAMENTOS -> ENVIADO A PACIENTE
-1, 3,N) DENEGADO POR CREDENCIAL INVALIDO -> PACIENTE NOTIFICADO
-3, 0
-
 ### WStateRelayer
 
 Contrato se encarga de relay el mensaje a la direccion que escucha eventos registrados por un topico especifico.
