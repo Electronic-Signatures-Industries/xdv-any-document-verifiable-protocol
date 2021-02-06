@@ -96,19 +96,46 @@ Additional DID signatures in Ed25519 and ECDSA / secp256k1 are also attached
 
 XDV uses a light version of MDV contracts for workflows
 
+mapActions tx
+mapGetters queries
+
+DR, PACIENTE, FARMACIA
+
+0, EMITE RECETA -> PACIENTE RECIBE
+1, PACIENTE ADQUIERE USANDO RECETA -> FARMACIA VERIFIES CREDENTIALS
+FORK
+1, 2, Y) FARMACIA VENDE MEDICAMENTOS -> ENVIADO A PACIENTE
+1, 3,N) DENEGADO POR CREDENCIAL INVALIDO -> PACIENTE NOTIFICADO
+3, 0
+
+### WStateRelayer
+
+Contrato se encarga de relay el mensaje a la direccion que escucha eventos registrados por un topico especifico.
+
+### WAction
+
+El WStateRelayer envia mensaje a un topico, este topico ejecuta un accion definida en el mensaje.
+
+### WMutation
+
+Cada accion emite eventos, cuales son capturados por instancias de WMutation, el cual modifica el estado ya se en cadena (on chain) o fuera de cadena (off chain). Ejemplo: Se requiere modificar y actualizar con el hash mas reciente, el contenido de un documento IPLD.
+
 ### ExternalAdapterRegistry
 
-### RoutingRegistry
-
-### ABIWorkflows
-
-### SmartRouter
+Adicionalmente, una accion puede ser pura, es decir, una funcion pura netamente ejecutada en el blockchain, o una accion hibridad por medio de el adaptor de registro externo, cual puede ser un oraculo, un mensaje a un servicio centralizado u otro contrato externo (external call).
 
 
-An **adapter** is a job to be executed, once a **event lifecycle pipeline like ABIWorkflow** steps thru each state, with the next step being **a registered route**
+## Configuracion
 
-Create Job
-    |
-Execute **adapter**  -- **event lifecycle** [before - mount - after - next] -- **route**
+1. Crear las acciones y registrarar en registro
+2. Crear los escuchas / listener para aplicar mutaciones.
+
+## Secuencia
+
+
+1. `Aplicacion ejecuta secuencia #1`: Crear receta - call recetas.execute(...)
+2. `Relayer obtiene y reenvia al contrato de accion`: relayer lee mapping y ejecuta accion
+3. `Accion envia resultados a mutacion`: Accion aplica regla de negocios y emite evento
+
 
 ## Copyright  Nov  2020 // Rogelio Morrell IFESA
